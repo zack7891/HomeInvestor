@@ -1,0 +1,81 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Investor</title>
+
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="~/Scripts/query.min.js"></script>
+    <script src="~/Scripts/skel.min.js"></script>
+    <script src="~/Scripts/skel-layers.min.js"></script>
+    <script src="~/Scripts/init.js"></script>
+
+    <link rel="stylesheet" href="~/Content/skel.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/style-xlarge.css" />
+</head>
+<body id="top">
+
+    <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="#">Home Investor</a></h1>
+        <nav id="nav">
+            <ul>
+                <li>
+                    @Html.ActionLink("Create Contract", "Index", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("Current Assets", "Index", "Asset")
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <section id="skel-layers-wrapper">
+    </section>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row double">
+                <div class="6u">
+                    <div class="row collapse-at-2">
+                        <div class="6u">
+
+                        </div>
+                        <div class="6u">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="6u">
+                    <ul class="icons">
+                        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                        <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+                        <li><a href="#" class="icon fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="#" class="icon fa-pinterest"><span class="label">Pinterest</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="copyright">
+                <li>&copy; Untitled. All rights reserved.</li>
+                <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+                <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

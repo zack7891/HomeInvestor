@@ -1,0 +1,43 @@
+﻿@model  HomeInvestor.Models.HouseModel
+<!-- Banner -->
+<section id="banner">
+    <div class="inner">
+        <h2>Please Enter Information for Smart Contract</h2>
+    </div>
+</section>
+
+<section>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+    <form method="post">
+        <label>Buyer EthAddress:</label>
+        <input type="password" id="Buyer" />
+        <br />
+        <label>Owner EthAddress:</label>
+        <input type="password" id="Owner" />
+        <br />
+        <label>Address:</label>
+        <input type="text" name="Address" />
+        <label>City:</label>
+        <input type="text" name="City" />
+        <label>State:</label>
+        <input type="text" name="State" />
+        <label>Zipcode:</label>
+        <input type="text" name="Zipcode" />
+        <label>Number of Bedrooms:</label>
+        <input type="text" name="Bedrooms" />
+        <label>Number of Bathrooms:</label>
+        <input type="text" name="Bathrooms" />
+        <label>Apprasied Home Value:</label>
+        <input type="text" name="HomeValue" />
+        <br />
+
+        <label>Please upload signed home apprasial:</label>
+        <input type="file" />
+        <br />
+        <br />
+        <input type="submit" value="Submit" />
+
+    </form>
+    }
+</section>
