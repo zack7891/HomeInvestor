@@ -1,10 +1,62 @@
-﻿@model HomeInvestor.Models.HouseModel
-@{
-    var house = ViewData["HouseModel"] as HomeInvestor.Models.HouseModels;
-}
+﻿@model IEnumerable<HomeInvestor.ViewModels.AssetVM>
 
 <h2>View</h2>
 <table>
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(a => a.HouseId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(a => a.EthAddress)
+            </th>
 
+            <th>
+                @Html.DisplayNameFor(a => a.HomeValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(a => a.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(a => a.State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(a => a.Bedrooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(a => a.Bathrooms)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.HouseId
+                </td>
+                <td>
+                    @item.EthAddress
+                </td>
+                <td>
+                    @item.HomeValue
+                </td>
+
+                <td>
+                    @item.City
+                </td>
+                <td>
+                    @item.State
+                </td>
+                <td>
+                    @item.Bedrooms
+                </td>
+                <td>
+                    @item.Bathrooms
+                </td>
+
+            </tr>
+        }
+    </tbody>
 </table>
 

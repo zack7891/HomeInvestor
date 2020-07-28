@@ -1,6 +1,8 @@
-﻿<!DOCTYPE HTML>
-<html>
+﻿
+<!DOCTYPE HTML>
+<html ng-app="app">
 <head>
+    <base href="/" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Investor</title>
@@ -10,6 +12,7 @@
     <script src="~/Scripts/skel.min.js"></script>
     <script src="~/Scripts/skel-layers.min.js"></script>
     <script src="~/Scripts/init.js"></script>
+
 
     <link rel="stylesheet" href="~/Content/skel.css" />
     <link rel="stylesheet" href="~/Content/style.css" />
@@ -28,6 +31,7 @@
                 <li>
                     @Html.ActionLink("Current Assets", "Index", "Asset")
                 </li>
+                <li>@Html.ActionLink("Sign In", "Login", "Account")</li>
             </ul>
         </nav>
     </header>
@@ -73,6 +77,7 @@
         </div>
     </footer>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/Scripts/angular.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

@@ -9,24 +9,21 @@ namespace HomeInvestor.Controllers
 {
     public class HomeController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View();
         }
+        ModelContext db = new ModelContext();
+        
         [HttpPost]
-        public ActionResult Index(HouseModels house)
+        public ActionResult AddContract(HouseModel house)
         {
-            int HouseId = house.HouseId;
-            string Address = house.Address;
-            string City = house.City;
-            string State = house.State;
-            int Zipcode = house.Zipcode;
-            int Bedrooms = house.Bedrooms;
-            int Bathrooms = house.Bathrooms;
-            int HomeValue = house.HomeValue;
+            
 
-           
-            return View();
+            db.Houses.Add(house);
+            db.SaveChanges();
+            return View("Index");
         }
         
     }

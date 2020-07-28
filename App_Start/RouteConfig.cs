@@ -12,6 +12,12 @@ namespace HomeInvestor
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            
+            routes.MapRoute(
+                name: "Angular Templates",
+                url: "templates/{name}",
+                defaults: new { controller = "AngularTemplate", action = "RenderView" }
+                );
 
             routes.MapRoute(
                 name: "Default",

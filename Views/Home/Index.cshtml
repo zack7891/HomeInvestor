@@ -1,4 +1,6 @@
-﻿@model  HomeInvestor.Models.HouseModel
+﻿@model HomeInvestor.Models.HouseModel
+
+
 <!-- Banner -->
 <section id="banner">
     <div class="inner">
@@ -7,37 +9,39 @@
 </section>
 
 <section>
-    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+
+    @using (Html.BeginForm("AddContract", "Home", FormMethod.Post))
     {
-    <form method="post">
-        <label>Buyer EthAddress:</label>
-        <input type="password" id="Buyer" />
-        <br />
-        <label>Owner EthAddress:</label>
-        <input type="password" id="Owner" />
-        <br />
-        <label>Address:</label>
-        <input type="text" name="Address" />
-        <label>City:</label>
-        <input type="text" name="City" />
-        <label>State:</label>
-        <input type="text" name="State" />
-        <label>Zipcode:</label>
-        <input type="text" name="Zipcode" />
-        <label>Number of Bedrooms:</label>
-        <input type="text" name="Bedrooms" />
-        <label>Number of Bathrooms:</label>
-        <input type="text" name="Bathrooms" />
-        <label>Apprasied Home Value:</label>
-        <input type="text" name="HomeValue" />
-        <br />
+        @Html.LabelFor(m => m.EthAddress)
+        @Html.TextBoxFor(model => model.EthAddress)
 
-        <label>Please upload signed home apprasial:</label>
-        <input type="file" />
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(model => model.Address)
 
-    </form>
+        @Html.LabelFor(m => m.City)
+        @Html.TextBoxFor(model => model.City)
+
+        @Html.LabelFor(m => m.State)
+        @Html.TextBoxFor(model => model.State)
+
+        @Html.LabelFor(m => m.Zipcode)
+        @Html.TextBoxFor(model => model.Zipcode)
+
+        @Html.LabelFor(m => m.Bedrooms)
+        @Html.TextBoxFor(model => model.Bedrooms)
+
+        @Html.LabelFor(m => m.Bathrooms)
+        @Html.TextBoxFor(model => model.Bathrooms)
+        
+        @Html.LabelFor(m => m.HomeValue)
+        @Html.TextBoxFor(model => model.HomeValue)
+        <input type="file" name="ImageFile" />
+
+        <br />
+        <br />
+        <input type="submit" value="Submit" class="btn btn-primary" />
     }
+
+
 </section>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>

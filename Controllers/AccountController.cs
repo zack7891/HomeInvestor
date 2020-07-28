@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HomeInvestor.Models;
+using Okta.AspNet;
 
 namespace HomeInvestor.Controllers
 {
@@ -54,11 +55,18 @@ namespace HomeInvestor.Controllers
 
         //
         // GET: /Account/Login
+
         [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                HttpContext.GetOwinContext().Authentication.Challenge(
+                        OktaDefaults.MvcAuthenticationType);
+                return new HttpUnauthorizedResult();
+            }
+
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -70,7 +78,7 @@ namespace HomeInvestor.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View("Index","Home");
             }
 
             // This doesn't count login failures towards account lockout
@@ -87,7 +95,7 @@ namespace HomeInvestor.Controllers
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                    return View("Index", "Home");
             }
         }
 
@@ -155,6 +163,7 @@ namespace HomeInvestor.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
