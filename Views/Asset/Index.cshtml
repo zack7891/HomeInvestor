@@ -1,14 +1,14 @@
-﻿@model IEnumerable<HomeInvestor.ViewModels.AssetVM>
+﻿@model IEnumerable<HomeInvestor.Models.Asset>
 
 <h2>View</h2>
 <table>
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(a => a.HouseId)
+                @Html.DisplayNameFor(a => a.AssetId)
             </th>
             <th>
-                @Html.DisplayNameFor(a => a.EthAddress)
+                @Html.DisplayNameFor(a => a.Owner.EthAdd)
             </th>
 
             <th>
@@ -33,10 +33,10 @@
         {
             <tr>
                 <td>
-                    @item.HouseId
+                    @item.AssetId
                 </td>
                 <td>
-                    @item.EthAddress
+                    @item.Owner.EthAdd
                 </td>
                 <td>
                     @item.HomeValue
@@ -59,4 +59,3 @@
         }
     </tbody>
 </table>
-

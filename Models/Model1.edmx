@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HOMEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetId" />
+          </Key>
+          <Property Name="AssetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="Bedrooms" Type="int" Nullable="false" />
+          <Property Name="Bathrooms" Type="int" Nullable="false" />
+          <Property Name="HomeValue" Type="int" Nullable="false" />
+          <Property Name="OwnerUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="BuyerId" />
+          </Key>
+          <Property Name="BuyerEth" Type="nvarchar" MaxLength="42" Nullable="false" />
+          <Property Name="BuyerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="EthAdd" Type="varchar" MaxLength="42" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Purchase">
+          <Key>
+            <PropertyRef Name="AssetId" />
+            <PropertyRef Name="BuyerId" />
+          </Key>
+          <Property Name="AssetId" Type="int" Nullable="false" />
+          <Property Name="BuyerId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Asset__OwnerUser__300424B4">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="1" />
+          <End Role="Asset" Type="Self.Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="OwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__AssetI__33D4B598">
+          <End Role="Asset" Type="Self.Asset" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asset">
+              <PropertyRef Name="AssetId" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="AssetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Purchase__BuyerI__34C8D9D1">
+          <End Role="Buyer" Type="Self.Buyer" Multiplicity="1" />
+          <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buyer">
+              <PropertyRef Name="BuyerId" />
+            </Principal>
+            <Dependent Role="Purchase">
+              <PropertyRef Name="BuyerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HOMEModelStoreContainer">
+          <EntitySet Name="Asset" EntityType="Self.Asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buyer" EntityType="Self.Buyer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Asset__OwnerUser__300424B4" Association="Self.FK__Asset__OwnerUser__300424B4">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="Asset" EntitySet="Asset" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__AssetI__33D4B598" Association="Self.FK__Purchase__AssetI__33D4B598">
+            <End Role="Asset" EntitySet="Asset" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Purchase__BuyerI__34C8D9D1" Association="Self.FK__Purchase__BuyerI__34C8D9D1">
+            <End Role="Buyer" EntitySet="Buyer" />
+            <End Role="Purchase" EntitySet="Purchase" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HOMEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HOMEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Assets" EntityType="HOMEModel.Asset" />
+          <EntitySet Name="Buyers" EntityType="HOMEModel.Buyer" />
+          <EntitySet Name="Owners" EntityType="HOMEModel.Owner" />
+          <AssociationSet Name="FK__Asset__OwnerUser__300424B4" Association="HOMEModel.FK__Asset__OwnerUser__300424B4">
+            <End Role="Owner" EntitySet="Owners" />
+            <End Role="Asset" EntitySet="Assets" />
+          </AssociationSet>
+          <AssociationSet Name="Purchase" Association="HOMEModel.Purchase">
+            <End Role="Asset" EntitySet="Assets" />
+            <End Role="Buyer" EntitySet="Buyers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Asset">
+          <Key>
+            <PropertyRef Name="AssetId" />
+          </Key>
+          <Property Name="AssetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="Bedrooms" Type="Int32" Nullable="false" />
+          <Property Name="Bathrooms" Type="Int32" Nullable="false" />
+          <Property Name="HomeValue" Type="Int32" Nullable="false" />
+          <Property Name="OwnerUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Owner" Relationship="HOMEModel.FK__Asset__OwnerUser__300424B4" FromRole="Asset" ToRole="Owner" />
+          <NavigationProperty Name="Buyers" Relationship="HOMEModel.Purchase" FromRole="Asset" ToRole="Buyer" />
+        </EntityType>
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="BuyerId" />
+          </Key>
+          <Property Name="BuyerEth" Type="String" Nullable="false" MaxLength="42" FixedLength="false" Unicode="true" />
+          <Property Name="BuyerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Assets" Relationship="HOMEModel.Purchase" FromRole="Buyer" ToRole="Asset" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="EthAdd" Type="String" Nullable="false" MaxLength="42" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Assets" Relationship="HOMEModel.FK__Asset__OwnerUser__300424B4" FromRole="Owner" ToRole="Asset" />
+        </EntityType>
+        <Association Name="FK__Asset__OwnerUser__300424B4">
+          <End Type="HOMEModel.Owner" Role="Owner" Multiplicity="1" />
+          <End Type="HOMEModel.Asset" Role="Asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Asset">
+              <PropertyRef Name="OwnerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Purchase">
+          <End Type="HOMEModel.Asset" Role="Asset" Multiplicity="*" />
+          <End Type="HOMEModel.Buyer" Role="Buyer" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HOMEModelStoreContainer" CdmEntityContainer="HOMEEntities">
+          <EntitySetMapping Name="Assets">
+            <EntityTypeMapping TypeName="HOMEModel.Asset">
+              <MappingFragment StoreEntitySet="Asset">
+                <ScalarProperty Name="OwnerUserId" ColumnName="OwnerUserId" />
+                <ScalarProperty Name="HomeValue" ColumnName="HomeValue" />
+                <ScalarProperty Name="Bathrooms" ColumnName="Bathrooms" />
+                <ScalarProperty Name="Bedrooms" ColumnName="Bedrooms" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buyers">
+            <EntityTypeMapping TypeName="HOMEModel.Buyer">
+              <MappingFragment StoreEntitySet="Buyer">
+                <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+                <ScalarProperty Name="BuyerEth" ColumnName="BuyerEth" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="HOMEModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="EthAdd" ColumnName="EthAdd" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Purchase" TypeName="HOMEModel.Purchase" StoreEntitySet="Purchase">
+            <EndProperty Name="Buyer">
+              <ScalarProperty Name="BuyerId" ColumnName="BuyerId" />
+            </EndProperty>
+            <EndProperty Name="Asset">
+              <ScalarProperty Name="AssetId" ColumnName="AssetId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

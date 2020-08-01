@@ -1,5 +1,5 @@
 ﻿using HomeInvestor.Models;
-using HomeInvestor.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,30 +10,26 @@ namespace HomeInvestor.Controllers
 {
     public class AssetController : Controller
     {
+        private HOMEEntities db = new HOMEEntities();
+
         // GET: Asset
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index()
         {
-            List<HouseModel> houseModels = new List<HouseModel>();
-            List<Owner.GetOwner> owners = new List<Owner.GetOwner>();
+            var userId = User.Identity.GetUserId();
+            var owner = db.Owners.Find(userId);
+            var assets = owner.Assets;
 
-
-
-            List<AssetVM> assetVMs = new List<AssetVM>();
-
-            foreach (var item in assetVMs)
+            return View(assets.ToList());
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                AssetVM asset = new AssetVM();
-                asset.HouseId = item.HouseId;
-                asset.EthAddress = item.EthAddress;
-                asset.City = item.City;
-                asset.State = item.State;
-                asset.HomeValue = item.HomeValue;
-                asset.Bedrooms = item.Bedrooms;
-                asset.Bathrooms = item.Bathrooms;
-                assetVMs.Add(asset);
+                db.Dispose();
             }
-            return View(assetVMs);
+            base.Dispose(disposing);
         }
     }
 }

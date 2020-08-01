@@ -5,6 +5,15 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeInvestor", "HomeInvestor.csproj", "{84885C9B-3AFF-45BD-9C57-1391E2FBAD57}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EBCD7F51-BB79-4CC5-84D1-10A5C5C77EC2}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Asset.sol = ..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Asset.sol
+		..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Leasing.sol = ..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Leasing.sol
+		..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Migrations.sol = ..\..\..\Documents\SmartLeasing\LeasingSmartContracts\Leasing\SmartLeasing\contracts\Migrations.sol
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractLib", "..\ContractLib\ContractLib.csproj", "{42DD8368-2313-46FC-B480-A7A3744AABB7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +24,10 @@ Global
 		{84885C9B-3AFF-45BD-9C57-1391E2FBAD57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84885C9B-3AFF-45BD-9C57-1391E2FBAD57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84885C9B-3AFF-45BD-9C57-1391E2FBAD57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42DD8368-2313-46FC-B480-A7A3744AABB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42DD8368-2313-46FC-B480-A7A3744AABB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42DD8368-2313-46FC-B480-A7A3744AABB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42DD8368-2313-46FC-B480-A7A3744AABB7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

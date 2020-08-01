@@ -12,18 +12,26 @@ namespace HomeInvestor.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Owner
+    public partial class Asset
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Owner()
+        public Asset()
         {
-            this.Assets = new HashSet<Asset>();
+            this.Buyers = new HashSet<Buyer>();
         }
     
-        public string UserId { get; set; }
-        public string EthAdd { get; set; }
+        public int AssetId { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int ZipCode { get; set; }
+        public int Bedrooms { get; set; }
+        public int Bathrooms { get; set; }
+        public int HomeValue { get; set; }
+        public string OwnerUserId { get; set; }
     
+        public virtual Owner Owner { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Asset> Assets { get; set; }
+        public virtual ICollection<Buyer> Buyers { get; set; }
     }
 }

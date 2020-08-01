@@ -9,7 +9,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HomeInvestor.Models;
-using Okta.AspNet;
 
 namespace HomeInvestor.Controllers
 {
@@ -59,14 +58,8 @@ namespace HomeInvestor.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            if (!HttpContext.User.Identity.IsAuthenticated)
-            {
-                HttpContext.GetOwinContext().Authentication.Challenge(
-                        OktaDefaults.MvcAuthenticationType);
-                return new HttpUnauthorizedResult();
-            }
-
-            return RedirectToAction("Index", "Home");
+         
+            return View();
         }
 
         //
@@ -163,8 +156,15 @@ namespace HomeInvestor.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
+
+                    var owner = new Owner { UserId = user.Id, EthAdd = model.EthAdd };
+                    using (var db = new HOMEEntities())
+                    {
+                        db.Owners.Add(owner);
+                        db.SaveChanges();
+                    }
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -398,10 +398,10 @@ namespace HomeInvestor.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
+        public ActionResult Logoff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
         //

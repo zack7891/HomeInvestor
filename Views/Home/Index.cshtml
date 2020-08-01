@@ -1,5 +1,6 @@
-﻿@model HomeInvestor.Models.HouseModel
+﻿@model HomeInvestor.Models.AssetVM
 
+@{Html.RenderPartial("_HeaderNavBar"); }
 
 <!-- Banner -->
 <section id="banner">
@@ -7,41 +8,70 @@
         <h2>Please Enter Information for Smart Contract</h2>
     </div>
 </section>
-
 <section>
 
     @using (Html.BeginForm("AddContract", "Home", FormMethod.Post))
     {
-        @Html.LabelFor(m => m.EthAddress)
-        @Html.TextBoxFor(model => model.EthAddress)
 
-        @Html.LabelFor(m => m.Address)
-        @Html.TextBoxFor(model => model.Address)
+        <text>
 
-        @Html.LabelFor(m => m.City)
-        @Html.TextBoxFor(model => model.City)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.OwnerUserId)
 
-        @Html.LabelFor(m => m.State)
-        @Html.TextBoxFor(model => model.State)
+            @Html.LabelFor(m => m.PrivateKey)
+            @Html.PasswordFor(m => m.PrivateKey)
+            
+            @Html.LabelFor(m=> m.BuyerAddress)
+            @Html.TextBoxFor(m=>m.BuyerAddress)
+            
+            @Html.LabelFor(m=> m.Ownership)
+            @Html.TextBoxFor(m=>m.Ownership)
+            
+            @Html.LabelFor(m=> m.Duration)
+            @Html.TextBoxFor(m=>m.Duration)
 
-        @Html.LabelFor(m => m.Zipcode)
-        @Html.TextBoxFor(model => model.Zipcode)
+            @Html.LabelFor(m => m.Address)
+            @Html.TextBoxFor(model => model.Address)
 
-        @Html.LabelFor(m => m.Bedrooms)
-        @Html.TextBoxFor(model => model.Bedrooms)
+            @Html.LabelFor(m => m.City)
+            @Html.TextBoxFor(model => model.City)
 
-        @Html.LabelFor(m => m.Bathrooms)
-        @Html.TextBoxFor(model => model.Bathrooms)
-        
-        @Html.LabelFor(m => m.HomeValue)
-        @Html.TextBoxFor(model => model.HomeValue)
-        <input type="file" name="ImageFile" />
+            @Html.LabelFor(m => m.State)
+            @Html.TextBoxFor(model => model.State)
 
-        <br />
-        <br />
-        <input type="submit" value="Submit" class="btn btn-primary" />
+            @Html.LabelFor(m => m.ZipCode)
+            @Html.TextBoxFor(model => model.ZipCode)
+
+            @Html.LabelFor(m => m.Bedrooms)
+            @Html.TextBoxFor(model => model.Bedrooms)
+
+            @Html.LabelFor(m => m.Bathrooms)
+            @Html.TextBoxFor(model => model.Bathrooms)
+
+            @Html.LabelFor(m => m.HomeValue)
+            @Html.TextBoxFor(model => model.HomeValue)
+
+            <br />
+            <br />
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </text>
     }
 
 
 </section>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
+    const IPFS = require('ipfs')
+
+    async function main() {
+        const node = await.IPFS.create()
+        const fileAdded = await node.add({
+            path: '$#fileUpload',
+            content: 'Apprasial'
+
+        })
+        console.log('Added file: ', fileAdded.path, fileAdded.cid)
+    }
+    main()
+
+</script>
