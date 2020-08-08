@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<HomeInvestor.Models.Asset>
 
 
-@{Html.RenderPartial("_HeaderNavBar");}
+@{Html.RenderPartial("_HeaderNavBar");
+    }
 <table class="table">
     <tr>
         <th>
@@ -25,11 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.HomeValue)
         </th>
-       
         <th>
             @Html.DisplayNameFor(model => model.Owner.EthAdd)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -56,9 +55,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HomeValue)
             </td>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.Owner.EthAdd)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", "HomeAssets", new { assetId = item.AssetId}, null)
             </td>
         </tr>
     }

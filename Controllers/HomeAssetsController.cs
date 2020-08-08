@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HomeInvestor.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HomeInvestor.Controllers
 {
@@ -14,10 +15,13 @@ namespace HomeInvestor.Controllers
     {
         private HOMEEntities db = new HOMEEntities();
 
+        
         // GET: HomeAssets
+        [Authorize]
         public ActionResult Index()
         {
-            var assets = db.Assets.Include(a => a.Owner);
+            var userId = User.Identity.GetUserId();  
+            var assets = db.Assets.Where(a => a.Owner.UserId == userId).Include(o=> o.Owner);
             return View(assets.ToList());
         }
 

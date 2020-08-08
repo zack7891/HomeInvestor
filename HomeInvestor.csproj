@@ -1010,11 +1010,11 @@
     <Content Include="Views\Account\LogOff.cshtml" />
     <Content Include="Views\Shared\_HeaderNavBarNoLogin.cshtml" />
     <Content Include="settings.config" />
+    <Content Include="Views\Buyer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Data\" />
-    <Folder Include="Views\Buyer\" />
     <Folder Include="Views\Contract\" />
   </ItemGroup>
   <ItemGroup>
